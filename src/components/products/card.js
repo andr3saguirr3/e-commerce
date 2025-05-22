@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/image"
 import ButtonAddCart from "./ButtonAddCart"
+import { useCart } from "@/context/cartContext"
 
 export default function Card({ product }) {
+    const { addToCart } = useCart();
     if (!product || !product.images || product.images.length === 0) {
         return <div>No image available</div>
     }
@@ -19,7 +22,7 @@ export default function Card({ product }) {
                 <p className="text-center mt-2 font-semibold">{product.name}</p>
                 <p className="text-center text-gray-700">${product.price}</p>
             </div>
-            <ButtonAddCart />
+            <ButtonAddCart onClick={() => addToCart(product)}/>
         </div>
     )
 }
